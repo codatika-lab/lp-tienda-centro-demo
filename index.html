@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catalogo con entregas rapidas en tu ciudad</title>
+  <meta name="description" content="Productos destacados y atencion inmediata por WhatsApp" />
+  <style>
+    :root { --primary: #0f766e; }
+    body { font-family: system-ui, sans-serif; margin: 0; color: #1f2937; }
+    header { padding: 48px 20px; background: #f9fafb; }
+    h1 { margin: 0 0 12px; }
+    .cta { display: inline-block; padding: 12px 20px; border-radius: 8px; color: white; background: var(--primary); text-decoration: none; }
+    main { padding: 24px 20px 48px; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; background: white; }
+    @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Catalogo con entregas rapidas en tu ciudad</h1>
+    <p>Productos destacados y atencion inmediata por WhatsApp</p>
+    <a class="cta" href="https://wa.me/573001112233">Comprar ahora</a>
+  </header>
+  <main>
+    <section class="grid">
+        <article class="card">
+          <h3>Producto 1</h3>
+          <p>Calidad garantizada</p>
+        </article>
+
+        <article class="card">
+          <h3>Producto 2</h3>
+          <p>Envio el mismo dia</p>
+        </article>
+
+        <article class="card">
+          <h3>Producto 3</h3>
+          <p>Promocion de temporada</p>
+        </article>
+    </section>
+  </main>
+</body>
+</html>
