@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Catalogo con entregas rapidas en tu ciudad</title>
   <meta name="description" content="Productos destacados y atencion inmediata por WhatsApp" />
-  <link rel="icon" href="https://placehold.co/32x32/0f766e/white?text=T" />
+  <link rel="icon" href="https://ui-avatars.com/api/?name=T&background=0f766e&color=fff&size=64&bold=true" />
   <style>
     :root { --primary: #0f766e; }
     body { font-family: system-ui, sans-serif; margin: 0; color: #1f2937; }
@@ -15,86 +15,130 @@
     .hero { padding: 48px 20px; background: #f9fafb; position: relative; }
     .hero-image { width: 100%; max-height: 420px; object-fit: cover; border-radius: 12px; margin-top: 16px; }
     h1 { margin: 0 0 12px; }
-    .cta { display: inline-block; padding: 12px 20px; border-radius: 8px; color: white; background: var(--primary); text-decoration: none; margin-top: 12px; }
+    .cta { display: inline-block; padding: 12px 20px; border-radius: 8px; color: white; background: var(--primary); text-decoration: none; margin-top: 12px; font-weight: 600; }
     main { padding: 24px 20px 48px; }
+    section > h2 { font-size: 20px; margin: 0 0 16px; }
     .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; background: white; }
     .card img, .card-media-placeholder { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 8px; background: #e5e7eb; }
     .precio { font-weight: 700; color: var(--primary); }
     .precio-missing { color: #b91c1c; font-weight: 500; }
-    .promo img { width: 100%; border-radius: 12px; }
+    .promo img { width: 100%; max-height: 320px; object-fit: cover; border-radius: 12px; }
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
     .gallery-item img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
     .testimonios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
     .testimonio { border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; background: white; }
     .avatar, .avatar-placeholder { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: #e5e7eb; margin-bottom: 8px; }
+    .estrellas { color: #f59e0b; margin: 4px 0; letter-spacing: 2px; }
+    .horarios-ubicacion { border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; padding: 20px 0; }
+    .maps-link { color: var(--primary); font-weight: 600; }
+    .floating-ctas { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 20; }
+    .floating-btn { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    .floating-btn.whatsapp { background: #25d366; }
+    .floating-btn.llamar { background: var(--primary); }
+    footer { background: #111827; color: #d1d5db; padding: 32px 20px; }
+    footer .footer-top { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+    footer .logo-text { color: white; }
+    footer a { color: #d1d5db; margin-right: 12px; }
+    footer .copyright { margin-top: 16px; font-size: 13px; color: #9ca3af; }
     @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   </style>
 </head>
 <body>
   <header>
-    <img class="logo" src="https://placehold.co/200x60/0f766e/white?text=Tienda+Centro" alt="Tienda Centro" />
+    <img class="logo" src="https://ui-avatars.com/api/?name=Tienda+Centro&amp;background=0f766e&amp;color=fff&amp;size=128&amp;bold=true&amp;rounded=true" alt="Tienda Centro" />
   </header>
   <section class="hero">
     <h1>Catalogo con entregas rapidas en tu ciudad</h1>
     <p>Productos destacados y atencion inmediata por WhatsApp</p>
     <a class="cta" href="https://wa.me/573001112233">Comprar ahora</a>
-    <img class="hero-image" src="https://placehold.co/1600x900/0f766e/white?text=Tienda+Centro" alt="Catalogo con entregas rapidas en tu ciudad" />
+    <img class="hero-image" src="https://picsum.photos/id/1080/1600/900" alt="Catalogo con entregas rapidas en tu ciudad" />
+  </section>
+  
+  <section class="promo">
+    <h2>Promocion destacada</h2>
+    <img src="https://picsum.photos/id/1074/1200/600" alt="Promocion destacada" loading="lazy" />
+    <p>Nueva coleccion de temporada</p>
   </section>
   <main>
-    <section class="grid">
+    <section class="grid" id="catalogo">
         <article class="card">
-          <img src="https://placehold.co/600x600/e2e8f0/1f2937?text=Producto+1" alt="Producto 1" loading="lazy" />
+          <img src="https://picsum.photos/id/1060/600/600" alt="Producto 1" loading="lazy" />
           <h3>Producto 1</h3>
           <p>Calidad garantizada</p>
           <p class="precio">COP$45.000</p>
         </article>
 
         <article class="card">
-          <img src="https://placehold.co/600x600/e2e8f0/1f2937?text=Producto+2" alt="Producto 2" loading="lazy" />
+          <img src="https://picsum.photos/id/1050/600/600" alt="Producto 2" loading="lazy" />
           <h3>Producto 2</h3>
           <p>Envio el mismo dia</p>
           <p class="precio">COP$62.000</p>
         </article>
 
         <article class="card">
-          <img src="https://placehold.co/600x600/e2e8f0/1f2937?text=Producto+3" alt="Producto 3" loading="lazy" />
+          <img src="https://picsum.photos/id/1040/600/600" alt="Producto 3" loading="lazy" />
           <h3>Producto 3</h3>
           <p>Promocion de temporada</p>
           <p class="precio">COP$38.000</p>
         </article>
     </section>
     
-  <section class="promo">
-    <img src="https://placehold.co/1200x600/0f766e/white?text=Promocion" alt="Promocion destacada" loading="lazy" />
-    <p>Nueva coleccion de temporada</p>
-  </section>
-    
-  <section class="gallery">
+  <section class="gallery" id="galeria">
     <h2>Galeria destacada</h2>
     <div class="gallery-grid">
         <figure class="gallery-item">
-          <img src="https://placehold.co/600x600/e2e8f0/1f2937?text=Nuevas+Llegadas" alt="Nuevas llegadas" loading="lazy" />
+          <img src="https://picsum.photos/id/1027/600/600" alt="Nuevas llegadas" loading="lazy" />
           <figcaption>Nuevas llegadas</figcaption>
         </figure>
 
         <figure class="gallery-item">
-          <img src="https://placehold.co/600x600/e2e8f0/1f2937?text=Temporada" alt="Temporada" loading="lazy" />
+          <img src="https://picsum.photos/id/1005/600/600" alt="Temporada" loading="lazy" />
           <figcaption>Temporada</figcaption>
         </figure>
     </div>
   </section>
     
-  <section class="testimonios">
+  <section class="testimonios" id="testimonios">
     <h2>Lo que dicen nuestros clientes</h2>
     <div class="testimonios-grid">
         <blockquote class="testimonio">
-          <img src="https://placehold.co/100x100/0f766e/white?text=LG" alt="Laura Gomez" class="avatar" loading="lazy" />
+          <img src="https://i.pravatar.cc/100?img=32" alt="Laura Gomez" class="avatar" loading="lazy" />
+          <p class="estrellas" aria-label="5 de 5 estrellas">★★★★★</p>
           <p>&ldquo;Excelente atencion y entrega rapida, quede muy satisfecha con mi compra.&rdquo;</p>
           <cite>Laura Gomez &mdash; Producto 1</cite>
         </blockquote>
     </div>
   </section>
   </main>
+  
+  <section class="horarios-ubicacion" id="horarios">
+    <h2>Horarios y ubicacion</h2>
+    <p class="horarios">Lun-Sab 9am-7pm</p>
+    <p><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Calle%2010%20%23%2020-30%2C%20Medellin" target="_blank" rel="noopener">Calle 10 # 20-30, Medellin (Google Maps)</a></p>
+  </section>
+  <footer>
+    <div class="footer-top">
+      <img class="logo" src="https://ui-avatars.com/api/?name=Tienda+Centro&amp;background=0f766e&amp;color=fff&amp;size=128&amp;bold=true&amp;rounded=true" alt="Tienda Centro" />
+      <nav>
+        <a href="#catalogo">Catalogo</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#testimonios">Opiniones</a>
+        <a href="#horarios">Horarios</a>
+      </nav>
+    </div>
+    <div class="rrss">
+      <a class="rrss-link" href="https://instagram.com/tiendacentro" target="_blank" rel="noopener">Instagram</a>
+        <a class="rrss-link" href="https://facebook.com/tiendacentro" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <p>
+      contacto@tiendacentro.co &middot; +573007778899
+    </p>
+    <p class="copyright">&copy; 2026 Tienda Centro</p>
+  </footer>
+  <div class="floating-ctas">
+    <a class="floating-btn llamar" href="tel:+573007778899" aria-label="Llamar">&#128222;</a>
+    <a class="floating-btn whatsapp" href="https://wa.me/573001112233" aria-label="WhatsApp">&#128172;</a>
+  </div>
 </body>
 </html>
