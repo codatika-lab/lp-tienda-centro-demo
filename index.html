@@ -3,43 +3,230 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Catalogo con entregas rapidas en tu ciudad</title>
-  <meta name="description" content="Productos destacados y atencion inmediata por WhatsApp" />
+  <title>Catalogo con entregas rapidas para toda tu ciudad</title>
+  <meta name="description" content="Descubre productos destacados con precio visible, promociones activas y atencion inmediata por WhatsApp." />
   <style>
-    :root { --primary: #0f766e; }
-    body { font-family: system-ui, sans-serif; margin: 0; color: #1f2937; }
-    header { padding: 48px 20px; background: #f9fafb; }
-    h1 { margin: 0 0 12px; }
-    .cta { display: inline-block; padding: 12px 20px; border-radius: 8px; color: white; background: var(--primary); text-decoration: none; }
-    main { padding: 24px 20px 48px; }
-    .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-    .card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; background: white; }
-    @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    :root {
+      --primary: #0f766e;
+      --surface: #f8fafc;
+      --text: #0f172a;
+      --muted: #475569;
+      --card: #ffffff;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--text); background: #fff; font-family: "Montserrat", "Inter", sans-serif; }
+    a { color: inherit; }
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+    .topbar { background: #fff; border-bottom: 1px solid var(--border); }
+    .topbar .container { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; }
+    .logo { height: 44px; width: auto; max-width: 180px; object-fit: contain; }
+    .logo-fallback { font-weight: 800; letter-spacing: 0.2px; }
+
+    .hero { background: var(--surface); padding: 22px 0 28px; }
+    .hero-grid { display: grid; gap: 18px; align-items: center; grid-template-columns: 1fr; }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.1; }
+    .hero p { margin: 0 0 16px; color: var(--muted); font-size: 1.05rem; }
+    .hero-img { width: 100%; border-radius: 14px; height: 280px; object-fit: cover; border: 1px solid var(--border); }
+
+    .cta-principal { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 22px; border-radius: 10px; background: var(--primary); color: #fff; text-decoration: none; font-weight: 700; }
+
+    .section { padding: 32px 0; }
+    .section h2 { margin: 0 0 14px; font-size: 1.4rem; }
+
+    .grid-catalogo { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .producto__img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+    .producto__body { padding: 14px; }
+    .producto__body h3 { margin: 0 0 8px; font-size: 1.1rem; }
+    .producto__body p { margin: 0 0 8px; color: var(--muted); font-size: 0.95rem; }
+    .precio { font-size: 1.05rem; color: var(--primary); }
+
+    .promo { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 6px 0 0; align-items: center; }
+    .promo img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; border: 1px solid var(--border); }
+
+    .galeria-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .galeria-item { margin: 0; }
+    .galeria-item img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); }
+    .galeria-item figcaption { margin-top: 6px; font-size: 0.92rem; color: var(--muted); }
+
+    .testimonios-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+    .testimonio { border: 1px solid var(--border); border-radius: 12px; padding: 14px; background: #fff; }
+    .testimonio__texto { margin: 0 0 10px; color: var(--muted); }
+    .testimonio__autor { margin: 0; font-weight: 700; }
+
+    .info-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+    .info-card { border: 1px solid var(--border); border-radius: 12px; padding: 14px; background: #fff; }
+    .info-card h3 { margin: 0 0 8px; }
+    .info-card p { margin: 0; color: var(--muted); }
+
+    .footer { margin-top: 32px; border-top: 1px solid var(--border); background: #fff; }
+    .footer .container { padding: 18px 0 28px; }
+    .footer-grid { display: grid; gap: 14px; grid-template-columns: 1fr; }
+    .footer-logo { height: 36px; width: auto; max-width: 180px; object-fit: contain; }
+    .footer-nav, .footer-contact, .footer-social { color: var(--muted); font-size: 0.95rem; }
+    .copyright { margin-top: 12px; font-size: 0.84rem; color: #64748b; }
+
+    .cta-float { position: fixed; right: 14px; bottom: 14px; display: flex; flex-direction: column; gap: 10px; z-index: 30; }
+    .cta-float a { display: inline-flex; align-items: center; justify-content: center; min-width: 134px; min-height: 42px; padding: 0 12px; border-radius: 999px; text-decoration: none; color: #fff; font-weight: 700; box-shadow: 0 6px 18px rgba(15, 23, 42, 0.2); }
+    .cta-call { background: #0f766e; }
+    .cta-wa { background: #16a34a; }
+
+    @media (min-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr 1fr; }
+      .grid-catalogo { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .promo { grid-template-columns: 1fr 1fr; }
+      .galeria-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .testimonios-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Catalogo con entregas rapidas en tu ciudad</h1>
-    <p>Productos destacados y atencion inmediata por WhatsApp</p>
-    <a class="cta" href="https://wa.me/573001112233">Comprar ahora</a>
+  <header class="topbar">
+    <div class="container">
+      <div><img class="logo" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Logo Tienda Centro" /></div>
+      <small>Medellin</small>
+    </div>
   </header>
-  <main>
-    <section class="grid">
-        <article class="card">
-          <h3>Producto 1</h3>
-          <p>Calidad garantizada</p>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>Catalogo con entregas rapidas para toda tu ciudad</h1>
+        <p>Descubre productos destacados con precio visible, promociones activas y atencion inmediata por WhatsApp.</p>
+        <a class="cta-principal" href="https://wa.me/573001112233">Comprar ahora</a>
+      </div>
+      <img class="hero-img" src="https://images.unsplash.com/photo-1604719312566-8912e9c8a213?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" alt="Hero Tienda Centro" />
+    </div>
+  </section>
+
+  <main class="container">
+    
+      <section class="promo" aria-label="Promocion destacada">
+        <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Promocion destacada" loading="lazy" />
+        <div>
+          <h2>Promocion de temporada vigente</h2>
+          <p>Lleva dos combos familiares y recibe envio gratis en toda el area metropolitana.</p>
+        </div>
+      </section>
+
+    <section class="section" aria-label="Catalogo de productos">
+      <h2>Catalogo de productos</h2>
+      <div class="grid-catalogo">
+        
+        <article class="card producto" aria-label="Producto Combo despensa semanal familiar">
+          <img class="producto__img" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Combo despensa semanal familiar" loading="lazy" />
+          <div class="producto__body">
+            <h3>Combo despensa semanal familiar</h3>
+            <p>Incluye seleccion de granos, snacks y basicos para siete dias con ahorro por volumen.</p>
+            <strong class="precio">COP$89.900</strong>
+          </div>
         </article>
 
-        <article class="card">
-          <h3>Producto 2</h3>
-          <p>Envio el mismo dia</p>
+        <article class="card producto" aria-label="Producto Kit limpieza hogar rendimiento">
+          <img class="producto__img" src="https://images.unsplash.com/photo-1583947582886-f40ec95dd752?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Kit limpieza hogar rendimiento" loading="lazy" />
+          <div class="producto__body">
+            <h3>Kit limpieza hogar rendimiento</h3>
+            <p>Set completo para cocina y banos con presentaciones rendidoras y fragancias suaves.</p>
+            <strong class="precio">COP$54.900</strong>
+          </div>
         </article>
 
-        <article class="card">
-          <h3>Producto 3</h3>
-          <p>Promocion de temporada</p>
+        <article class="card producto" aria-label="Producto Selección premium cuidado personal">
+          <img class="producto__img" src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Selección premium cuidado personal" loading="lazy" />
+          <div class="producto__body">
+            <h3>Selección premium cuidado personal</h3>
+            <p>Productos de cuidado diario con ingredientes suaves, ideal para uso frecuente familiar.</p>
+            <strong class="precio">COP$72.500</strong>
+          </div>
         </article>
+
+        <article class="card producto" aria-label="Producto Pack bebidas y refrigerios mixtos">
+          <img class="producto__img" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Pack bebidas y refrigerios mixtos" loading="lazy" />
+          <div class="producto__body">
+            <h3>Pack bebidas y refrigerios mixtos</h3>
+            <p>Combinacion de bebidas y snacks para oficina o reuniones con variedad de sabores.</p>
+            <strong class="precio">COP$64.000</strong>
+          </div>
+        </article>
+
+        <article class="card producto" aria-label="Producto Canasta frutas y verduras frescas">
+          <img class="producto__img" src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Canasta frutas y verduras frescas" loading="lazy" />
+          <div class="producto__body">
+            <h3>Canasta frutas y verduras frescas</h3>
+            <p>Frutas y verduras seleccionadas del dia, listas para consumo y preparaciones saludables.</p>
+            <strong class="precio">COP$47.800</strong>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    
+      <section class="section" aria-label="Galeria destacada">
+        <h2>Galeria destacada</h2>
+        <div class="galeria-grid">
+          
+            <figure class="galeria-item">
+              <img src="https://images.unsplash.com/photo-1556909114-4f2e5df8f7a4?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Nuevas llegadas destacadas para tu hogar" loading="lazy" />
+              <figcaption>Nuevas llegadas destacadas para tu hogar</figcaption>
+            </figure>
+
+            <figure class="galeria-item">
+              <img src="https://images.unsplash.com/photo-1553531384-397c80973a36?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Temporada de ahorro inteligente" loading="lazy" />
+              <figcaption>Temporada de ahorro inteligente</figcaption>
+            </figure>
+        </div>
+      </section>
+    
+
+    <section class="section" aria-label="Horarios y ubicacion">
+      <h2>Horarios y ubicacion</h2>
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>Horarios</h3>
+          <p>Lun-Vie 8am-6pm, Sab 9am-2pm</p>
+        </article>
+        <article class="info-card">
+          <h3>Ubicacion</h3>
+          <p>Calle 10 # 42-15, Medellin</p>
+          <p><a href="https://maps.google.com/?q=Calle+10+42-15+Medellin" target="_blank" rel="noreferrer">Ver en mapa</a></p>
+        </article>
+      </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img class="footer-logo" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Logo footer Tienda Centro" />
+        </div>
+        <div class="footer-nav">
+          <strong>Menu</strong><br />
+          Inicio · Catalogo · Ubicacion
+        </div>
+        <div class="footer-contact">
+          <strong>Contacto</strong><br />
+          contacto@tiendacentro.co
+          <br />
+          +5744445566
+        </div>
+        <div class="footer-social">
+          <strong>Redes</strong><br />
+          <a href="https://instagram.com/tiendacentro" target="_blank" rel="noreferrer">Instagram</a><br />
+          <a href="https://facebook.com/tiendacentro" target="_blank" rel="noreferrer">Facebook</a><br />
+          
+        </div>
+      </div>
+      <p class="copyright">© 2026 Tienda Centro. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="cta-float" aria-label="CTAs secundarias flotantes">
+    <a class="cta-call" href="tel:5744445566">Llamar</a>
+    <a class="cta-wa" href="https://wa.me/573001112233">WhatsApp</a>
+  </div>
 </body>
 </html>
