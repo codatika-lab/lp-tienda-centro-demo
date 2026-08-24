@@ -9,7 +9,20 @@
   <style>
     :root { --primary: #0f766e; }
     body { font-family: system-ui, sans-serif; margin: 0; color: #1f2937; }
-    header { padding: 24px 20px; display: flex; align-items: center; gap: 12px; }
+    .site-header { position: sticky; top: 0; z-index: 60; background: #ffffff; border-bottom: 1px solid #e5e7eb; box-shadow: 0 2px 12px rgba(17,24,39,0.06); transition: transform 0.3s ease; }
+    .site-header--hidden { transform: translateY(-120%); }
+    .site-header-inner { max-width: 1080px; margin: 0 auto; min-height: 72px; padding: 8px 20px; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; }
+    .site-header-panel { justify-self: end; display: flex; gap: 10px; align-items: center; }
+    .site-header-mobile { display: none; }
+    .site-nav { display: flex; gap: 8px; justify-content: flex-end; }
+    .site-nav a { color: #111827; text-decoration: none; font-weight: 600; min-height: 42px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; transition: color 0.15s ease, background-color 0.15s ease; }
+    .site-nav a:hover { color: var(--primary); background: color-mix(in srgb, var(--primary) 14%, white); }
+    .site-header-cta { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 18px; border-radius: 10px; text-decoration: none; color: #fff; background: var(--primary); font-weight: 600; transition: filter 0.2s ease; }
+    .site-header-cta:hover { filter: brightness(0.9); }
+    .menu-toggle { display: none; width: 44px; height: 44px; border-radius: 999px; border: 1px solid #d1d5db; background: #fff; font-size: 20px; line-height: 1; }
+    .menu-toggle .close { display: none; }
+    .site-header-mobile[open] .menu-toggle .open { display: none; }
+    .site-header-mobile[open] .menu-toggle .close { display: inline; }
     .logo { height: 40px; }
     .logo-text { font-weight: 700; font-size: 20px; color: var(--primary); }
     .hero { padding: 48px 20px; background: #f9fafb; position: relative; }
@@ -30,6 +43,7 @@
     .testimonio { border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; background: white; }
     .avatar, .avatar-placeholder { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: #e5e7eb; margin-bottom: 8px; }
     .estrellas { color: #f59e0b; margin: 4px 0; letter-spacing: 2px; }
+    .nosotros { margin-top: 24px; }
     .horarios-ubicacion { border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; padding: 20px 0; }
     .maps-link { color: var(--primary); font-weight: 600; }
     .floating-ctas { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 20; }
@@ -42,13 +56,52 @@
     footer a { color: #d1d5db; margin-right: 12px; }
     footer .copyright { margin-top: 16px; font-size: 13px; color: #9ca3af; }
     @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 767px) {
+      .site-header-inner { grid-template-columns: 1fr auto; }
+      .site-header-panel--desktop { display: none; }
+      .site-header-mobile { display: block; position: relative; }
+      .site-header-mobile > summary { list-style: none; }
+      .site-header-mobile > summary::-webkit-details-marker { display: none; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+      .site-header-panel--mobile { position: absolute; top: calc(100% + 8px); right: 0; width: min(92vw, 280px); padding: 10px; border: 1px solid #e5e7eb; background: #fff; border-radius: 12px; box-shadow: 0 16px 30px rgba(17,24,39,0.12); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-8px); transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; }
+      .site-header-mobile[open] > .site-header-panel--mobile { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+      .site-nav { width: 100%; flex-direction: column; gap: 6px; }
+      .site-nav a { width: 100%; min-height: 46px; }
+      .site-header-cta { width: 100%; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <img class="logo" src="https://ui-avatars.com/api/?name=Tienda+Centro&amp;background=0f766e&amp;color=fff&amp;size=128&amp;bold=true&amp;rounded=true" alt="Tienda Centro" />
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="#inicio" aria-label="Ir al inicio"><img class="logo" src="https://ui-avatars.com/api/?name=Tienda+Centro&amp;background=0f766e&amp;color=fff&amp;size=128&amp;bold=true&amp;rounded=true" alt="Tienda Centro" /></a>
+
+      <div class="site-header-panel site-header-panel--desktop">
+        <nav class="site-nav" aria-label="Navegacion principal">
+          <a href="#inicio">Inicio</a>
+          <a href="#catalogo">Catalogo</a>
+          <a href="#nosotros">Nosotros</a>
+        </nav>
+        <a class="site-header-cta" href="#contacto" aria-label="Ir a contacto">Hablemos</a>
+      </div>
+
+      <details class="site-header-mobile">
+        <summary class="menu-toggle" aria-label="Abrir menu">
+          <span class="open" aria-hidden="true">☰</span>
+          <span class="close" aria-hidden="true">×</span>
+        </summary>
+        <div class="site-header-panel site-header-panel--mobile">
+          <nav class="site-nav" aria-label="Navegacion principal movil">
+            <a href="#inicio">Inicio</a>
+            <a href="#catalogo">Catalogo</a>
+            <a href="#nosotros">Nosotros</a>
+          </nav>
+          <a class="site-header-cta" href="#contacto" aria-label="Ir a contacto">Hablemos</a>
+        </div>
+      </details>
+    </div>
   </header>
-  <section class="hero">
+  <section class="hero" id="inicio">
     <h1>Catalogo con entregas rapidas en tu ciudad</h1>
     <p>Productos destacados y atencion inmediata por WhatsApp</p>
     <a class="cta" href="https://wa.me/573001112233">Comprar ahora</a>
@@ -99,6 +152,11 @@
     </div>
   </section>
     
+  <section class="nosotros" id="nosotros">
+    <h2>Nosotros</h2>
+    <p>Tienda Centro acompana a sus clientes en Medellin con una experiencia simple y atencion rapida por WhatsApp.</p>
+  </section>
+    
   <section class="testimonios" id="testimonios">
     <h2>Lo que dicen nuestros clientes</h2>
     <div class="testimonios-grid">
@@ -112,7 +170,7 @@
   </section>
   </main>
   
-  <section class="horarios-ubicacion" id="horarios">
+  <section class="horarios-ubicacion" id="contacto">
     <h2>Horarios y ubicacion</h2>
     <p class="horarios">Lun-Sab 9am-7pm</p>
     <p><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Calle%2010%20%23%2020-30%2C%20Medellin" target="_blank" rel="noopener">Calle 10 # 20-30, Medellin (Google Maps)</a></p>
@@ -124,7 +182,7 @@
         <a href="#catalogo">Catalogo</a>
         <a href="#galeria">Galeria</a>
         <a href="#testimonios">Opiniones</a>
-        <a href="#horarios">Horarios</a>
+        <a href="#contacto">Horarios</a>
       </nav>
     </div>
     <div class="rrss">
@@ -140,5 +198,39 @@
     <a class="floating-btn llamar" href="tel:+573007778899" aria-label="Llamar">&#128222;</a>
     <a class="floating-btn whatsapp" href="https://wa.me/573001112233" aria-label="WhatsApp">&#128172;</a>
   </div>
+  <script>
+    (() => {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+
+      const threshold = 80;
+      const delta = 8;
+      let lastY = window.scrollY;
+
+      const onScroll = () => {
+        const currentY = window.scrollY;
+        const diff = currentY - lastY;
+        if (Math.abs(diff) < delta) return;
+
+        if (diff > 0 && currentY > threshold) {
+          header.classList.add('site-header--hidden');
+        } else {
+          header.classList.remove('site-header--hidden');
+        }
+
+        lastY = currentY;
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      const mobileMenu = document.querySelector('.site-header-mobile');
+      if (!mobileMenu) return;
+      mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.removeAttribute('open');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
