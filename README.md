@@ -1,7 +1,16 @@
-# Landing del Cliente
+# Tienda Centro
 
-ProjectId: 11111111-1111-4111-8111-111111111111
-Publish target: preview_only
-Generated at: 2026-08-24T22:44:39.704Z
+Landing page generada y publicada automaticamente por CDTK para **Tienda Centro**.
 
-Repositorio creado automaticamente por el orquestador MVP de CDTK.
+## Datos del cliente
+- Project ID: NIT901998910
+- Nombre del negocio: Tienda Centro
+- Sector: comercio
+- WhatsApp: +573001112233
+
+## Publicacion
+- Publish target: preview_only
+- Generado el: 2026-08-24T23:04:28.954Z
+
+Este repositorio contiene la landing publicada (`index.html`) y el historial de generaciones (`.orchestrator-audit.jsonl`).
+No editar manualmente: los cambios se sobrescriben en cada nueva generacion.
