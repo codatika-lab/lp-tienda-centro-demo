@@ -10,7 +10,7 @@ Landing page generada y publicada automaticamente por CDTK para **Tienda Centro*
 
 ## Publicacion
 - Publish target: preview_only
-- Generado el: 2026-08-25T14:45:00.387Z
+- Generado el: 2026-08-25T15:15:33.350Z
 
 Este repositorio contiene la landing publicada (`index.html`) y el historial de generaciones (`.orchestrator-audit.jsonl`).
 No editar manualmente: los cambios se sobrescriben en cada nueva generacion.
